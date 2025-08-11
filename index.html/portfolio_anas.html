@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Anas Khan — Embedded Systems Portfolio</title>
+  <meta name="description" content="Portfolio of Anas Khan — Embedded Systems Enthusiast & STM32 Developer" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#00b4d8; --glass: rgba(255,255,255,0.04);
+      --light-bg: #f7fafc; --light-card:#ffffff; --light-text:#0b1220; --transition: 250ms;
+    }
+    html,body{height:100%;}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,-apple-system,"Helvetica Neue",Arial; margin:0; color:#e6eef6; background:linear-gradient(180deg,#071021 0%, #071827 100%); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+    /* Light theme */
+    body.light{color:var(--light-text); background:var(--light-bg);}
+
+    /* NAV */
+    .nav{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:60;display:flex;gap:12px;background:var(--glass);padding:8px;border-radius:999px;backdrop-filter: blur(6px);box-shadow:0 6px 20px rgba(2,6,23,0.6);} 
+    .nav a{color:inherit;text-decoration:none;padding:8px 12px;border-radius:999px;font-weight:600;font-size:14px;opacity:0.9}
+    .nav a.active{background:linear-gradient(90deg,var(--accent),#0077b6);color:#031224}
+
+    /* Container */
+    .container{max-width:1000px;margin:0 auto;padding:110px 20px 80px;}
+
+    /* HERO */
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center}
+    .hero-card{padding:28px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 6px 30px rgba(2,6,23,0.6);}
+    .hero h1{margin:0;font-size:2.2rem;line-height:1.03}
+    .hero p.lead{color:var(--muted);margin-top:12px;font-size:1rem}
+    .cta{margin-top:18px;display:flex;gap:10px}
+    .btn{padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:700}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#0077b6);color:#031224}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:inherit}
+
+    /* profile card */
+    .profile{background:var(--card);border-radius:14px;padding:10px;overflow:hidden;height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .profile img{width:120px;height:120px;border-radius:999px;object-fit:cover;border:4px solid rgba(255,255,255,0.06)}
+    .profile h4{margin:12px 0 0 0}
+    .profile small{color:var(--muted)}
+
+    /* SECTIONS */
+    section{margin-top:56px}
+    h2.section-title{font-size:1.1rem;color:var(--accent);margin:0 0 10px}
+    .card{background:var(--card);padding:18px;border-radius:12px;margin-bottom:16px}
+    .skills{display:flex;flex-wrap:wrap;gap:10px}
+    .skill{background:rgba(255,255,255,0.04);padding:8px 12px;border-radius:999px;font-weight:600}
+
+    /* Projects grid */
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .project{display:flex;gap:12px;align-items:center}
+    .project img{width:96px;height:72px;object-fit:cover;border-radius:8px}
+    .project .meta{flex:1}
+    .project h4{margin:0 0 6px 0}
+    .project p{margin:0;color:var(--muted);font-size:0.95rem}
+
+    /* Contact */
+    .contact-row{display:flex;gap:12px}
+    .input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+    textarea{min-height:110px}
+
+    footer{margin-top:40px;padding:28px;text-align:center;color:var(--muted)}
+
+    /* RESPONSIVE */
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr;}
+      .grid{grid-template-columns:1fr}
+      .nav{left:12px;transform:none;}
+      .container{padding-top:90px}
+    }
+
+    /* LIGHT theme tweaks */
+    body.light .nav{background:rgba(10,20,30,0.03)}
+    body.light .card{background:var(--light-card);box-shadow:0 6px 20px rgba(12,20,40,0.03)}
+    body.light .profile{background:var(--light-card)}
+    body.light .project p{color:#465569}
+
+    /* subtle animations */
+    .fade-in{opacity:0;transform:translateY(10px);transition:var(--transition) ease;}
+    .fade-in.show{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav" aria-label="Primary">
+    <a href="#home" class="nav-link">Home</a>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#skills" class="nav-link">Skills</a>
+    <a href="#projects" class="nav-link">Projects</a>
+    <a href="#contact" class="nav-link">Contact</a>
+    <button id="themeToggle" title="Toggle theme" style="margin-left:6px;padding:6px 10px;border-radius:8px">🌙</button>
+  </nav>
+
+  <main class="container">
+    <header id="home" class="hero">
+      <div class="hero-card card fade-in" data-delay="0">
+        <h1>Anas Khan</h1>
+        <p class="lead">Embedded Systems Enthusiast &amp; STM32 Developer</p>
+        <p style="color:var(--muted);margin-top:12px">I am a dedicated and fast-learning diploma student in Electronics, seeking opportunity to gain hands-on experience in embedded systems. I am passionate about learning and contributing to practical engineering solutions.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#projects">View Projects</a>
+          <a class="btn btn-ghost" href="mailto:anaskham909654@gmail.com">Contact Me</a>
+        </div>
+      </div>
+
+      <aside class="profile fade-in" data-delay="80">
+        <!-- Placeholder profile image - replace assets/images/profile.jpg -->
+        <img src="assets/images/profile-placeholder.jpg" alt="Profile">
+        <h4>Anas Khan</h4>
+        <small>STM32 • C • Python</small>
+      </aside>
+    </header>
+
+    <section id="about" class="fade-in" data-delay="160">
+      <h2 class="section-title">About Me</h2>
+      <div class="card">
+        <p>I am a dedicated and fast-learning diploma student in Electronics, seeking opportunity to gain hands-on experience in embedded systems. I enjoy building practical solutions using microcontrollers, exploring peripherals like UART, I2C, SPI and improving my embedded C skills.</p>
+      </div>
+    </section>
+
+    <section id="skills" class="fade-in" data-delay="260">
+      <h2 class="section-title">Skills</h2>
+      <div class="card skills">
+        <span class="skill">STM32</span>
+        <span class="skill">C</span>
+        <span class="skill">Python</span>
+        <span class="skill">Git</span>
+        <span class="skill">Basic MS Office</span>
+      </div>
+    </section>
+
+    <section id="projects" class="fade-in" data-delay="340">
+      <h2 class="section-title">Projects</h2>
+      <div class="grid">
+        <div class="project card">
+          <img src="assets/images/project1.png" alt="LED ON">
+          <div class="meta">
+            <h4>LED-ON</h4>
+            <p>Simple project: initializing GPIO and setting LED pin HIGH to turn LED ON. Files: main.c, stm32cube project files, wiring image.</p>
+          </div>
+        </div>
+
+        <div class="project card">
+          <img src="assets/images/project2.png" alt="LED Toggle">
+          <div class="meta">
+            <h4>LED-Toggle</h4>
+            <p>Toggle an LED with a timed delay using systick or HAL_Delay. Good starter for interrupts/timers practice.</p>
+          </div>
+        </div>
+
+        <div class="project card">
+          <img src="assets/images/project3.png" alt="Pin Read">
+          <div class="meta">
+            <h4>Pin-Read Implementation</h4>
+            <p>Read a GPIO pin state and report via UART — useful for buttons, sensors, and debugging via serial console.</p>
+          </div>
+        </div>
+
+        <div class="project card">
+          <img src="assets/images/project4.png" alt="Placeholder">
+          <div class="meta">
+            <h4>More coming soon</h4>
+            <p>Projects based on RTOS</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="fade-in" data-delay="420">
+      <h2 class="section-title">Contact</h2>
+      <div class="card">
+        <p>Prefer email? <a href="mailto:anaskham909654@gmail.com">anaskham909654@gmail.com</a></p>
+        <p style="margin-top:12px;color:var(--muted)">Alternatively, upload project files to your GitHub and link them in the Projects section — easy to manage and shows your progress.</p>
+      </div>
+    </section>
+
+    <footer>
+      <small>© 2025 Anas Khan — Built with ❤️ • Lightweight HTML/CSS/JS</small>
+    </footer>
+  </main>
+
+  <script>
+    // Simple theme toggle
+    const btn = document.getElementById('themeToggle');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initial = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+    if(initial === 'light') document.body.classList.add('light');
+    btn.textContent = document.body.classList.contains('light') ? '🌞' : '🌙';
+    btn.addEventListener('click', ()=>{
+      document.body.classList.toggle('light');
+      const isLight = document.body.classList.contains('light');
+      btn.textContent = isLight ? '🌞' : '🌙';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+
+    // Smooth scroll and active nav
+    const links = document.querySelectorAll('.nav-link');
+    links.forEach(l=> l.addEventListener('click', e=>{
+      e.preventDefault();
+      const id = l.getAttribute('href');
+      document.querySelector(id).scrollIntoView({behavior:'smooth',block:'start'});
+    }));
+
+    // IntersectionObserver to highlight nav and animate sections
+    const sections = document.querySelectorAll('main section, main header');
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        // nav active
+        if(entry.isIntersecting){
+          links.forEach(a=> a.classList.toggle('active', a.getAttribute('href') === `#${entry.target.id}`));
+        }
+        // fade-in animation
+        if(entry.isIntersecting){
+          entry.target.querySelectorAll('.fade-in').forEach(el=> el.classList.add('show'));
+          entry.target.classList.add('visible');
+        }
+      });
+    },{root:null,threshold:0.28});
+    sections.forEach(s=> obs.observe(s));
+
+    // reveal initial hero elements
+    document.querySelectorAll('.fade-in').forEach((el,i)=> setTimeout(()=> el.classList.add('show'), 120*i));
+  </script>
+</body>
+</html>
